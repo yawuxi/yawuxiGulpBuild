@@ -1,0 +1,42 @@
+/*----- mixins ----- */
+
+// ==adaptiveFont==
+@mixin adaptive-font($pcSize, $mobSize) {
+	$addSize: $pcSize - $mobSize;
+	$maxWidth: $maxWidth - 320;
+	font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+}
+
+// ==adaptiveValue==
+@mixin adaptive-value($property, $startSize, $minSize) {
+	$addSize: $startSize - $minSize;
+	#{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth - 320}));
+}
+
+// ==fontFace==
+@mixin font-face($font-family, $url, $weight, $style) {
+	@font-face {
+		font-family: "#{$font-family}";
+		src: url('../fonts/#{$url}.woff2') format("woff2");
+		font-weight: #{$weight};
+		font-display: swap;
+		font-style: $style;
+	}
+}
+
+// flexMixins
+@mixin flex-v-center {
+	display: flex;
+	align-items: center;
+}
+
+@mixin flex-h-center {
+	display: flex;
+	align-items: center;
+}
+
+@mixin flex-v-h-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

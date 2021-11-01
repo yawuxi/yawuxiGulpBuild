@@ -1,0 +1,9 @@
+// ==hereImportAllScssStyles==
+@import "variables";
+@import "mixins";
+@import "fonts";
+@import "global";
+@import "ui";
+// ==stylesForSections==
+@import "sections/header";
+@import "sections/footer";
