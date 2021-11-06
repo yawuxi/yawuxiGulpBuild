@@ -1,3 +1,3 @@
 // == hereConnectAllJsScripts ==
 'use strict';
-@@include('components/_burgerMenu.js');
+@@include('modules/_burgerMenu.js');
