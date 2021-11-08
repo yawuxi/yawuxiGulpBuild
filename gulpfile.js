@@ -17,8 +17,7 @@ let path = {
 		css: sourceFolder + "/scss/style.scss",
 		js: sourceFolder + "/js/script.js",
 		img: {
-			defImg: sourceFolder + "/img/**/*.{png,jpg,gif,ico,webp}",
-			svg: sourceFolder + "/img/**/*.svg"
+			defImg: sourceFolder + "/img/**/*.{png,jpg,gif,ico,webp,svg}",
 		},
 		fonts: sourceFolder + "/fonts/*.ttf",
 	},
