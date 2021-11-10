@@ -1,3 +1,6 @@
 // == hereConnectAllJsScripts ==
 'use strict';
-@@include('modules/_burgerMenu.js');
+
+import { burgerMenu } from "./modules/_burgerMenu";
+
+burgerMenu();
