@@ -33,6 +33,9 @@ let path = {
 	clean: "./" + projectFolder + "/"
 };
 
+// Конфиг для webpack
+let webPackConfig = './webpack.config.js';
+
 // Функции из gulp
 const {
 	src,
@@ -55,8 +58,7 @@ const del = require('del');
 const imageMin = require('gulp-image');
 const ttf2woff = require('gulp-ttf2woff');
 const ttf2woff2 = require('gulp-ttf2woff2');
-const uglify = require('gulp-uglify-es').default;
-
+const webpackStream = require('webpack-stream');
 
 // *Функции-обработчики
 
@@ -98,14 +100,10 @@ const styles = () => {
 		.pipe(browserSync.stream());
 };
 
-// Сжатие и переименование js
-const js = () => {
+// webpack
+const jsWebpack = () => {
 	return src(path.src.js)
-		.pipe(fileinclude())
-		.pipe(uglify())
-		.pipe(rename({
-			extname: ".min.js"
-		}))
+		.pipe(webpackStream(require('./webpack.config')))
 		.pipe(dest(path.build.js))
 		.pipe(browserSync.stream());
 };
@@ -136,7 +134,7 @@ const watchFiles = () => {
 	gulp.watch(path.watch.css, styles);
 	gulp.watch(path.watch.html, html);
 	gulp.watch(path.watch.img.defImg, images);
-	gulp.watch(path.watch.js, js);
+	gulp.watch(path.watch.js, jsWebpack);
 };
 
 // Удаление папки dist
@@ -145,7 +143,7 @@ const clean = () => {
 };
 
 // Порядок запуска (series - запускает по порядку, parallel - парралельно)
-let build = series(clean, parallel(html, styles, js, images, fonts));
+let build = series(clean, parallel(html, styles, jsWebpack, images, fonts));
 let watch = parallel(build, watchFiles, browserRefresh);
 
 // Создание тасков (exports.имяТАСКА = функция которая отвечает за этот таск)
